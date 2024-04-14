@@ -9,8 +9,6 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "start": "node gendiff.js",
-    "gendiff": "node gendiff.js -h",
     "test": "npx jest"
   },
   "license": "ISC",
