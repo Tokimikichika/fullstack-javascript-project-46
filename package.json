@@ -9,6 +9,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
+    "lint": "eslint",
     "test": "npx jest"
   },
   "license": "ISC",
