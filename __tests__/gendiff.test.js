@@ -6,7 +6,7 @@ import { expectedStylish, expectedPlain, expectedJSON } from '../__fixtures__/ex
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const getFixturePath = (filepath) => path.join(dirname, '..', '__fixtures__', filepath);
-
+//так же я не понимаю каую часть нужно отделять от основного кода???
 const casesForSuccessTests = [
   ['file1.json', 'file2.json'],
   ['file1.yml', 'file2.yml', 'stylish'],
@@ -28,16 +28,16 @@ test.each(casesForSuccessTests)('Compare %s with %s in format %s', (filepath1, f
   expect(genDiff(fixturePath1, fixturePath2, format)).toEqual(expected);
 });
 
-test('File extension is not supported', () => {
-  const fixturePath1 = getFixturePath('file1.json');
-  const fixturePath2 = getFixturePath('file2.txt');
-  const expected = 'File extension .txt is not supported';
-  expect(genDiff(fixturePath1, fixturePath2)).toEqual(expected);
+test('Should throw error for unsupported file extension', () => {
+  const fixturePath1 = getFixturePath('file1.json'); 
+  const fixturePath2 = getFixturePath('file2.txt'); 
+  const expectedMessage = 'File extension .txt is not supported'; 
+  expect(() => genDiff(fixturePath1, fixturePath2)).toThrow(expectedMessage); 
 });
 
-test('Invalid output format', () => {
-  const fixturePath1 = getFixturePath('file1.json');
-  const fixturePath2 = getFixturePath('file2.json');
-  const expected = 'Invalid output format: \'unusual\'';
-  expect(genDiff(fixturePath1, fixturePath2, 'unusual')).toEqual(expected);
+test('Should throw error for invalid output format', () => {
+  const fixturePath1 = getFixturePath('file1.json'); 
+  const fixturePath2 = getFixturePath('file2.json'); 
+  const expectedMessage = "Invalid output format: 'unusual'"; 
+  expect(() => genDiff(fixturePath1, fixturePath2, 'unusual')).toThrow(expectedMessage); 
 });

@@ -16,7 +16,7 @@ function startGenDiff() {
       process.exit(0);
     })
     .option('-f, --format [type]', 'output format', 'stylish')
-    .option('-h, --help', 'isplay help for command', () => {
+    .option('-h, --help', ' Display help for command', () => {
       console.log(program.help());
       process.exit(0);
     })

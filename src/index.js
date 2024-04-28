@@ -5,7 +5,10 @@ import parsers from './parsers.js';
 import searchDiff from './search.js';
 
 function transferPathToFileContent(filepath) {
-  const normalizePath = filepath.includes('fixtures') ? filepath : path.resolve(process.cwd(), '__fixtures__', filepath);
+  const baseDir = path.resolve(process.cwd(), '__fixtures__'); 
+  const normalizePath = path.isAbsolute(filepath) ? filepath : path.resolve(baseDir, filepath);
+  // я не совсем понял как тут можно указать относительный путь, 
+  // ведь все тестовые файлы находся в папке __fixture__
   if (!fs.existsSync(normalizePath)) {
     return `File does not exist at the specified path ${filepath}`;
   }

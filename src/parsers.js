@@ -8,7 +8,7 @@ const parsers = (fileContent, fileExtension) => {
     case '.yaml':
       return yaml.load(fileContent);
     default:
-      return `File extension ${fileExtension} is not supported`;
+      throw new Error(`File extension ${fileExtension} is not supported`);
   }
 };
 export default parsers;

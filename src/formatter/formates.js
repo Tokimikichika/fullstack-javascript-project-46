@@ -11,7 +11,7 @@ const formates = (data, format, replacer = '    ') => {
     case 'json':
       return json(data, null, replacer);
     default:
-      return `Invalid output format: '${format}'`;
+      throw new Error(`Invalid output format: '${format}'`);
   }
 };
 export default formates;
