@@ -5,16 +5,14 @@ import parsers from './parsers.js';
 import searchDiff from './search.js';
 
 function transferPathToFileContent(filepath) {
-  const baseDir = path.resolve(process.cwd(), '__fixtures__'); 
-  const normalizePath = path.isAbsolute(filepath) ? filepath : path.resolve(baseDir, filepath);
-  // я не совсем понял как тут можно указать относительный путь, 
-  // ведь все тестовые файлы находся в папке __fixture__
-  if (!fs.existsSync(normalizePath)) {
+  const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath); 
+
+  if (!fs.existsSync(getAbsolutePath)) {
     return `File does not exist at the specified path ${filepath}`;
   }
 
-  const fileContent = fs.readFileSync(normalizePath, 'utf-8');
-  const fileExtension = path.extname(normalizePath);
+  const fileContent = fs.readFileSync(getAbsolutePath, 'utf-8');
+  const fileExtension = path.extname(getAbsolutePath);
 
   return parsers(fileContent, fileExtension);
 }
@@ -23,12 +21,6 @@ function genDiff(filepath1, filepath2, format = 'stylish') {
   const data1 = transferPathToFileContent(filepath1);
   const data2 = transferPathToFileContent(filepath2);
 
-  if (typeof data1 === 'string') {
-    return data1;
-  }
-  if (typeof data2 === 'string') {
-    return data2;
-  }
   const diff = searchDiff(data1, data2);
   const formattedDiff = formates(diff, format);
   return formattedDiff;

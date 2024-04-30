@@ -4,7 +4,6 @@
   "type": "module",
   "description": "genDiff project",
   "main": "src/index.js",
-  "author": "",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },

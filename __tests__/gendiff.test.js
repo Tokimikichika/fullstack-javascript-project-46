@@ -6,7 +6,6 @@ import { expectedStylish, expectedPlain, expectedJSON } from '../__fixtures__/ex
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const getFixturePath = (filepath) => path.join(dirname, '..', '__fixtures__', filepath);
-//так же я не понимаю каую часть нужно отделять от основного кода???
 const casesForSuccessTests = [
   ['file1.json', 'file2.json'],
   ['file1.yml', 'file2.yml', 'stylish'],
