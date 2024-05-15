@@ -5,14 +5,14 @@ import parsers from './parsers.js';
 import searchDiff from './search.js';
 
 function transferPathToFileContent(filepath) {
-  const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath); 
+  const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 
-  if (!fs.existsSync(getAbsolutePath)) {
+  if (!fs.existsSync(getAbsolutePath(filepath))) {
     return `File does not exist at the specified path ${filepath}`;
   }
 
-  const fileContent = fs.readFileSync(getAbsolutePath, 'utf-8');
-  const fileExtension = path.extname(getAbsolutePath);
+  const fileContent = fs.readFileSync(getAbsolutePath(filepath), 'utf-8');
+  const fileExtension = path.extname(getAbsolutePath(filepath));
 
   return parsers(fileContent, fileExtension);
 }
