@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import json from './json.js';
+import plain from './plain.js';
 
 const stringify = (data, depth, replacer) => {
   if (!_.isObject(data)) {
@@ -52,4 +54,17 @@ const stylish = (diffs, replacer = '    ') => {
     '}'].join('\n');
 };
 
-export default stylish;
+const formatData = (data, format, replacer = '    ') => {
+  switch (format) {
+    case 'stylish':
+      return stylish(data, replacer);
+    case 'plain':
+      return plain(data);
+    case 'json':
+      return json(data, null, replacer);
+    default:
+      throw new Error(`Invalid output format: '${format}'`);
+  }
+};
+
+export { stylish, formatData };

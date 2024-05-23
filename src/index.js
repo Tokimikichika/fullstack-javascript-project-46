@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import formates from './formatter/formates.js';
+import { formatData } from './formatter/stylish.js';
 import parsers from './parsers.js';
 import searchDiff from './search.js';
 
 function transferPathToFileContent(filepath) {
-  const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
+  const getAbsolutePath = () => path.resolve(process.cwd(), filepath);
 
   if (!fs.existsSync(getAbsolutePath(filepath))) {
     return `File does not exist at the specified path ${filepath}`;
@@ -22,7 +22,7 @@ function genDiff(filepath1, filepath2, format = 'stylish') {
   const data2 = transferPathToFileContent(filepath2);
 
   const diff = searchDiff(data1, data2);
-  const formattedDiff = formates(diff, format);
+  const formattedDiff = formatData(diff, format);
   return formattedDiff;
 }
 
